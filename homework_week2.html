@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <title>Gum's bakery :-)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Nanum+Myeongjo:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        .max-small {
+            width: auto;
+            height: auto;
+            max-width: 350px;
+            max-height: 350px;
+        }
+
+        * {
+            font-family: 'Nanum Myeongjo', serif;
+            color: black;
+        }
+
+        .menu {
+            font-weight: bold;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .comment {
+            color: darkgray;
+            font-weight: lighter;
+        }
+
+        .Exchange_Point {
+            color: mediumseagreen;
+            font-size: smaller;
+            text-decoration: underline;
+        }
+
+        .inform {
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        .post-box {
+            width: 500px;
+            margin: 20px auto;
+            border: 2px solid rgb(151, 148, 148);
+            border-radius: 10px;
+            padding: 50px;
+        }
+
+        .button {
+            margin: auto;
+            width: 50%;
+        }
+    </style>
+
+    <script>
+        function hey() {
+            let customer_name = $('#customer_name').val();
+            let count = $('#count').val();
+            let customer_add = $('#customer_add').val();
+            let customer_tel = $('#customer_tel').val();
+
+            if (customer_name === '') {
+                alert('이름을 입력해주세요👻');
+            } else {
+                if (count === '수량을 선택하세요') {
+                    alert('수량을 선택해주세요🤖');
+                } else {
+                    if (customer_add === '') {
+                        alert('주소를 입력해주세요🐾');
+                    } else {
+                        if (customer_tel === '') {
+                            alert('전화번호를 입력해주세요👾')
+                        } else {
+                            alert('주문이 완료되었습니다! 감사합니다💕');
+                        }
+                    }
+                }
+            }
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "https://api.manana.kr/exchange/rate.json",
+            data: {},
+            success: function (response) {
+                let value = response[1]["rate"];
+                console.log(value)
+                $('#Exchange_Rate').text(value)
+            }
+        })
+        
+    </script>
+
+</head>
+
+<body>
+    <div>
+        <div class="inform">
+            <img class='max-small'
+                src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/94728359_158066242346598_8161534451880950256_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=106&_nc_ohc=lx-vd0tGmoAAX-1HUWA&oh=561d6c4e87d07301abf9595e49b712e6&oe=5EE40382" />
+
+            <h1 class="menu">바질토마토식빵</h1>
+            <h5 class="price">가격: 4500원/1ea</h5>
+            <p class="comment">바질과 토마토의 조화로움이 잘 어우러진 식빵입니다</p>
+            <p class = "Exchange_Point"> 💰 달러-원 환율 : <span id="Exchange_Rate"></span>원</p>
+
+        </div>
+    </div>
+
+
+    <div>
+        <div class="post-box">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">주문자 성함</label>
+                <input type="text" class="form-control" id="customer_name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">수량</label>
+                <select class="form-control" id="count">
+                    <option>수량을 선택하세요</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">주소</label>
+                <input type="text" class="form-control" id="customer_add">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">전화번호</label>
+                <input type="tel" class="form-control" id="customer_tel">
+            </div>
+            <div class="botton">
+                <button onclick="hey()" class="btn btn-warning">주문하기</button>
+            </div>
+
+        </div>
+
+</body>
+
+</html>
